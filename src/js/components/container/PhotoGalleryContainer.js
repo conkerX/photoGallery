@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Test from "../presentational/Test.jsx";
-// import "../../../styles/appStyles.scss";
-import "../../../styles/appStyles.css";
+import "../../../styles/appStyles.scss";
+// import "../../../styles/appStyles.css";
 
 class PhotoGalleryContainer extends Component {
   constructor() {
