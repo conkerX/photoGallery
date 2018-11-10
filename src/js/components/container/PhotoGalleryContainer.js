@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import Test from "../presentational/Test";
+import Test from "../presentational/Test.jsx";
 
 class PhotoGalleryContainer extends Component {
   constructor() {
