@@ -1,3 +1,26 @@
 h1 {
   color: blue;
 }
+
+.nav {
+  background-color: #99cc00;
+  padding: 10px;
+}
+
+.img-container {
+  display: inline-block;
+  padding: 10px;
+}
+
+.settingIcon {
+  background-image: url("./../images/setting.png");
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+}
+
+#frontImg {
+  height: 400px;
+  width: 600px;
+}
