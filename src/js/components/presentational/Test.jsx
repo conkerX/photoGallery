@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Test = ({ world }) => (
   <div>
-    <p>Hello {world}</p>
+    <h1>Hello {world}</h1>
   </div>
 );
 

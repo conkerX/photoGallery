@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "allows users to either click or swipe through images",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "react-bootstrap": "^0.32.4"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.5",
     "@babel/preset-env": "^7.1.5",

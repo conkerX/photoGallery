@@ -24,3 +24,7 @@ h1 {
   height: 400px;
   width: 600px;
 }
+
+.carousel-inner > .item > img {
+  margin: auto;
+}
