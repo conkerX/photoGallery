@@ -18,10 +18,16 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        // test: /.js$/,
+        // loader: "babel-loader",
+        // include: path.join(__dirname, "./server.js"),
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"
         }
+        // query: {
+        //   presets: ["es2015", "react"]
+        // }
       },
       {
         test: /\.html$/,
