@@ -32,14 +32,15 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.1.10",
+    "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.min.js",
     "build": "webpack",
     "test-start": "nodemon ./server.js",
     "test-dev": "webpack-dev-server --mode development --watch",
-    "server-build": "webpack --mode production && nodemon ./server.js",
+    "server-build": "webpack --mode production && nodemon ./server.min.js",
     "test-build": "webpack --mode production --watch"
   },
   "repository": {
