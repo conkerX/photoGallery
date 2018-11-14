@@ -1,4 +1,4 @@
-require("@babel/register");
+require('@babel/register');
 // ({
 //   presets: ["es2015", "react"]
 // });
@@ -7,34 +7,38 @@ require("@babel/register");
 //   presets: ["@babel/preset-react"]
 // });
 
-const path = require("path");
-const express = require("express");
-const cors = require("cors");
+const path = require('path');
+const express = require('express');
+const cors = require('cors');
 
-const React = require("react");
-const { renderToString } = require("react-dom/server");
+const React = require('react');
+const renderToString = require('react-dom/server').renderToString;
 
 // const PhotoGalleryContainer = require("./src/js/client/components/container/PhotoGalleryContainer.js");
-const SSRTest = require("./src/js/client/components/container/SSRTest.js");
-const getPokemon = require("./services/getPokemon");
+const SSRTest = require('./src/js/client/components/container/SSRTest.js').default;
+const getPokemon = require('./services/getPokemon').default;
 
 const app = express();
 const PORT = process.env.PORT || 8084;
 
 app.use(cors());
-app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.get("/", (req, res) => {
-  getPokemon.withAbility("telepath").then(resp => {
-    const pokemon = { list: resp.data.pokemon };
-    console.log("pokemon -->", pokemon);
-    // const html = renderToString(
-    //   React.createElement(SSRTest, { pokemon: pokemon, test: "test" })
-    // );
-    const html = renderToString(<SSRT pokemon={pokemon} test={"test"} />);
+app.get('/', (req, res) => {
+  // getPokemon.withAbility('telepath').then(resp => {
+  //   const pokemon = { list: resp.data.pokemon };
+  //   console.log('pokemon -->', pokemon);
+  //   // const html = renderToString(
+  //   //   React.createElement(SSRTest, { pokemon: pokemon, test: "test" })
+  //   // );
+  //   const html = renderToString(<SSRTest pokemon={pokemon} test={'test'} />);
 
-    res.status(200).send(htmlTemplate("ssr-test", html));
-  });
+  //   res.status(200).send(htmlTemplate('ssr-test', html));
+  // });
+
+  const html = renderToString(<SSRTest pokemon={'pokemon'} test={'test'} />);
+
+  res.status(200).send(htmlTemplate('ssr-test', html));
 
   // const appString = renderToString(React.createElement(PhotoGalleryContainer));
   // const appString = renderToString(PhotoGalleryContainer);
@@ -48,7 +52,7 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`listening on PORT ${PORT}`);
-  console.log("Press Ctrl+C to quit.");
+  console.log('Press Ctrl+C to quit.');
 });
 
 function htmlTemplate(title, appDom) {
