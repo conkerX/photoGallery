@@ -24,7 +24,8 @@ const app = express();
 const PORT = process.env.PORT || 8084;
 
 app.use(cors());
-app.use(express.static(path.resolve(__dirname, "public")));
+// app.use(express.static(path.resolve(__dirname, "public")));
+app.use("/static", express.static("public"));
 
 app.get("/", (req, res) => {
   fetchRepos().then(data => {
@@ -37,9 +38,10 @@ app.get("/", (req, res) => {
           <title>SSR with React</title>
           <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
       </head>
-
+          
       <body>
           <div id="app">${markup}</div>
+          <script src="/static/js/public.js" defer></script>
       </body>
       </html>`);
   });

@@ -25,7 +25,7 @@ class SSRTest extends React.Component {
 
   render() {
     const { data } = this.state;
-
+    console.log("yo", ">>>>");
     return (
       <div>
         <h1>Hello from SSR Test</h1>

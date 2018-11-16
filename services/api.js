@@ -14,4 +14,13 @@ const fetchRepos = () => {
     });
 };
 
+// const fetchRepos = () => {
+//   return fetch("https://api.github.com/users/conkerX/repos")
+//     .then(data => {
+//       console.log("data -->", data);
+//       return data;
+//     })
+//     .catch(err => console.log(err));
+// };
+
 export default fetchRepos;
