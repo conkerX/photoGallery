@@ -1,4 +1,4 @@
-require('@babel/register');
+// require("@babel/register");
 // ({
 //   presets: ["es2015", "react"]
 // });
@@ -7,70 +7,65 @@ require('@babel/register');
 //   presets: ["@babel/preset-react"]
 // });
 
-const path = require('path');
-const express = require('express');
-const cors = require('cors');
+const path = require("path");
+const express = require("express");
+const cors = require("cors");
 
-const React = require('react');
-const renderToString = require('react-dom/server').renderToString;
-
+const React = require("react");
+const renderToString = require("react-dom/server").renderToString;
+const serialize = require("serialize-javascript");
+const axios = require("axios");
+const fetchRepos = require("./services/api").default;
 // const PhotoGalleryContainer = require("./src/js/client/components/container/PhotoGalleryContainer.js");
-const SSRTest = require('./src/js/client/components/container/SSRTest.js').default;
-const getPokemon = require('./services/getPokemon').default;
+const SSRTest = require("./src/js/client/components/container/SSRTest.js")
+  .default;
 
 const app = express();
 const PORT = process.env.PORT || 8084;
 
 app.use(cors());
-app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, "public")));
 
-app.get('/', (req, res) => {
-  // getPokemon.withAbility('telepath').then(resp => {
-  //   const pokemon = { list: resp.data.pokemon };
-  //   console.log('pokemon -->', pokemon);
-  //   // const html = renderToString(
-  //   //   React.createElement(SSRTest, { pokemon: pokemon, test: "test" })
-  //   // );
-  //   const html = renderToString(<SSRTest pokemon={pokemon} test={'test'} />);
+app.get("/", (req, res) => {
+  fetchRepos().then(data => {
+    const markup = renderToString(<SSRTest data={data} />);
 
-  //   res.status(200).send(htmlTemplate('ssr-test', html));
-  // });
+    res.send(`<!DOCTYPE html>
+      <html>
+      <head>
+          <meta charset="utf-8">
+          <title>SSR with React</title>
+          <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
+      </head>
 
-  const html = renderToString(<SSRTest pokemon={'pokemon'} test={'test'} />);
-
-  res.status(200).send(htmlTemplate('ssr-test', html));
-
-  // const appString = renderToString(React.createElement(PhotoGalleryContainer));
-  // const appString = renderToString(PhotoGalleryContainer);
-
-  // const appString = renderToString(React.createElement(SSRTest));
-  // const appString = renderToString(SSRTest);
-
-  // res.writeHead(200, { "Content-Type": "text/html" });
-  // res.send(htmlTemplate("photoGallery", appString));
+      <body>
+          <div id="app">${markup}</div>
+      </body>
+      </html>`);
+  });
 });
 
 app.listen(PORT, () => {
   console.log(`listening on PORT ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
+  console.log("Press Ctrl+C to quit.");
 });
 
-function htmlTemplate(title, appDom) {
-  return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-          <meta charset="utf-8">
-          <title>${title}</title>
-      </head>
+// function htmlTemplate(title, appDom, data) {
+//   return `
+//       <!DOCTYPE html>
+//       <html>
+//       <head>
+//           <meta charset="utf-8">
+//           <title>${title}</title>
+//       </head>
 
-      <body>
-          <div id="app">${appDom}</div>
-          <script src="./app.bundle.js"></script>
-      </body>
-      </html>
-  `;
-}
+//       <body>
+//           <div id="app">${appDom}</div>
+//           <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
+//       </body>
+//       </html>
+//   `;
+// }
 
 /* *********************** */
 

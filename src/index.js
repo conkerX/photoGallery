@@ -11,4 +11,9 @@ import SSRTest from "./js/client/components/container/SSRTest";
 // wrapper ? ReactDOM.hydrate(<PhotoGalleryContainer />, wrapper) : false;
 
 const wrapper = document.getElementById("root");
-wrapper ? ReactDOM.hydrate(<SSRTest />, wrapper) : false;
+wrapper
+  ? ReactDOM.hydrate(
+      <SSRTest data={window.__INITIAL_DATA__} test={"test"} />,
+      wrapper
+    )
+  : false;
