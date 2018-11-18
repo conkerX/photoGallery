@@ -2,18 +2,12 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
-// const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const browserConfig = {
   entry: ["./src/index.js"],
-  // entry: {
-  //   client: "./src/index.js",
-  //   bundle: "./public/main.js"
-  // },
   output: {
     path: path.resolve(__dirname, "public"),
-    // filename: "[name].js"
     filename: "js/public.js",
     publicPath: "/static/"
   },
@@ -26,16 +20,10 @@ const browserConfig = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        // test: /.js$/,
-        // loader: "babel-loader",
-        // include: path.join(__dirname, "./server.js"),
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"
         }
-        // query: {
-        //   presets: ["es2015", "react"]
-        // }
       },
       {
         test: /\.html$/,
