@@ -71,6 +71,9 @@ const browserConfig = {
     new MiniCssExtractPlugin({
       filename: "[name].[hash].css",
       chunkFilename: "[id].[hash].css"
+    }),
+    new webpack.DefinePlugin({
+      __isBrowser__: true
     })
   ]
 };
@@ -89,7 +92,7 @@ const serverConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: "false"
+      __isBrowser__: false
     })
   ]
 };

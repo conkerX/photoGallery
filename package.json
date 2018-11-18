@@ -41,8 +41,8 @@
     "start": "node server.min.js",
     "build": "webpack",
     "test-start": "nodemon ./server.min.js",
-    "test-dev": "webpack-dev-server --mode development --watch",
-    "server-build": "webpack --mode production && nodemon ./server.min.js",
+    "test-dev": "webpack-dev-server --mode development --watch && nodemon ./server.min.js",
+    "server-build": "rm server.min.js && webpack --mode production && nodemon ./server.min.js",
     "test-build": "webpack --mode production --watch",
     "pack": "webpack --config webpack.config.js",
     "ssr": "npm run pack && npm run test-start"
